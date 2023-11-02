@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from src.consts import KAMCHATKA_REGION
+
 
 class BaseLocators:
     PARENT_LOCATOR = (By.XPATH, "..")
@@ -22,4 +24,12 @@ class SbisPageLocators(BaseLocators):
         "//*[contains(@class, 'tensor_ru-container') and contains (*//text(), 'Работаем')]",
     )
     WORKING_BLOCK_IMAGE = (By.TAG_NAME, "img")
-    REGION_DEFINED = (By.CLASS_NAME, "sbis_ru-Region-Chooser__text sbis_ru-link")
+    REGION_DEFINED = (
+        By.XPATH,
+        "(//span[@class='sbis_ru-Region-Chooser__text sbis_ru-link'])[1]",
+    )
+    PARTNERS_LIST = (
+        By.XPATH,
+        "(//div[@name='itemsContainer' and @data-qa='items-container'])[1]/div[position()>1]",
+    )
+    KAMCHATKA_REGION_ITEM = (By.XPATH, f"//span[@title='{KAMCHATKA_REGION}']")
