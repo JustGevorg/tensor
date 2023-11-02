@@ -2,7 +2,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from src.consts import KAMCHATKA_REGION, KAMCHATKA_REGION_URL, TENSOR_ABOUT_URL
-from src.pages.loacators import SbisPageLocators
+from src.pages.loacators import SbisPageLocators, TensorPageLocators
 
 
 class BasePage:
@@ -78,7 +78,7 @@ class SbisPage(BasePage):
     def should_img_identical_sizes(self, locator):
         working_block = self.find_element(locator=locator)
         images = self.find_elements(
-            element=working_block, locator=SbisPageLocators.WORKING_BLOCK_IMAGE
+            element=working_block, locator=TensorPageLocators.WORKING_BLOCK_IMAGE
         )
         images_sizes = [
             (img.get_attribute("width"), img.get_attribute("height")) for img in images
