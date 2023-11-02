@@ -1,6 +1,4 @@
-import time
-
-from src.consts import SBIS_PAGE_URL
+from src.consts import MY_REGION, SBIS_PAGE_URL
 from src.pages.loacators import SbisPageLocators
 from src.pages.page import SbisPage
 
@@ -10,12 +8,19 @@ def test_first_scenario(browser):
     sbis_page.open_page()
     sbis_page.go_to_contacts_page(locator=SbisPageLocators.CONTACTS_PAGE_LINK)
     sbis_page.go_to_tensor_page(locator=SbisPageLocators.TENSOR_BANNER_IMG)
-    time.sleep(1)
+    sbis_page.should_block_strength_is_in_people(
+        locator=SbisPageLocators.STRENGTH_IS_IN_PEOPLE_BLOCK
+    )
+    sbis_page.should_strength_is_in_people_about_open(
+        locator=SbisPageLocators.STRENGTH_IS_IN_PEOPLE_ABOUT
+    )
+    sbis_page.should_img_identical_sizes(locator=SbisPageLocators.WORKING_BLOCK)
 
 
-# def main() -> None:
-#     ...
-
-
-# if __name__ == "__main__":
-#     main()
+def test_second_scenario(browser):
+    sbis_page = SbisPage(driver=browser, base_url=SBIS_PAGE_URL)
+    sbis_page.open_page()
+    sbis_page.go_to_contacts_page(locator=SbisPageLocators.CONTACTS_PAGE_LINK)
+    sbis_page.should_my_region_defined(
+        locator=SbisPageLocators.REGION_DEFINED, my_region=MY_REGION
+    )
